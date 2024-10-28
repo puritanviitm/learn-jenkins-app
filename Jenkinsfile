@@ -4,6 +4,7 @@ pipeline {
     environment{
         NETLIFY_SITE_ID='ee45d1a4-a8ea-478b-a83d-d14a6ada58da'
         NETLIFY_AUTH_TOKEN= credentials('netlify-token')
+        REACT_APP_VERSION="1.0.$BUILD_ID"
     }
 
     stages {
@@ -106,14 +107,7 @@ pipeline {
             }
         }
 
-        stage('Approval'){
-            steps{
-                timeout(time: 15, unit: 'MINUTES') {
-                    input message: 'Ready to Deploy', ok: 'Yes I am sure'
-    
-                }
-            }
-        }
+        
         
         stage('Deploy Prod') {
             agent {
